@@ -154,8 +154,11 @@ window.addEventListener('keydown', (e) => {
 // 8. Download APK Button
 const apkBtn = document.getElementById('btn-apk-hero');
 if (apkBtn) {
-  apkBtn.addEventListener('click', () => {
-    window.open('https://github.com/TeamSquare/NIRIKSHAN/releases', '_blank');
+  apkBtn.addEventListener('click', (e) => {
+    // If it's an <a> tag, native navigation works; otherwise fallback to window.open
+    if (apkBtn.tagName.toLowerCase() !== 'a') {
+      window.open('https://github.com/erkrishna69/SIH/releases/tag/v1.0.0-build.4-4432452', '_blank');
+    }
   });
 }
 
