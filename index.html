@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SquareX (NIRIKSHAN) — Real-time zero-trust inspection infrastructure for field teams and supervisors. Smart India Hackathon 2026 (SIH26095)." />
+  <title>SquareX — Every inspection. Verified.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="kinetic-canvas"></canvas>
+  <header class="nav">
+    <a class="brand" href="#">square<span>x</span></a>
+    <nav>
+      <a href="#platform">Platform</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#gaps">Gaps &amp; Fixes</a>
+      <a href="#schemes">Schemes</a>
+      <a href="#monitor">Monitoring</a>
+      <a href="#topology">Architecture</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="button secondary" id="theme-toggle" style="padding:10px 14px;font-size:11px;cursor:pointer"><span id="theme-icon">🌙</span> <span id="theme-label">Dark grid</span></button>
+      <button class="button secondary" id="btn-watch-demo" style="padding:10px 16px;font-size:11px">Watch demo <span>▶</span></button>
+      <a class="nav-cta button primary" href="https://adminaccess.kxoproduction.in/" target="_blank" rel="noopener" style="padding:10px 18px;border-radius:999px;font-size:12px;font-weight:600">Admin Portal <span>↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#587364;margin-right:6px;box-shadow:0 0 0 4px rgba(88,115,100,.15);vertical-align:middle"></span> KINETIC GRID ENGINE · CURSOR WARP &amp; CLICK RIPPLE ACTIVE</p>
+        <h1>Every inspection.<br><em>Verified.</em></h1>
+        <p class="hero-sub">Real-time inspection infrastructure for field teams and supervisors. Built for Ministry of Social Justice &amp; Empowerment mandate.</p>
+        <div class="actions">
+          <a class="button primary" href="https://adminaccess.kxoproduction.in/" target="_blank" rel="noopener">Open Admin Portal <span>↗</span></a>
+          <button class="button secondary" id="btn-hero-demo">See how it works <span>▶</span></button>
+          <a class="button secondary" href="#platform">View platform <span>↓</span></a>
+          <button class="button secondary" id="btn-apk-hero" style="border-style:dashed">Download APK <span>↓</span></button>
+        </div>
+      </div>
+
+      <div class="hero-stage reveal delay">
+        <div class="stage-grid"></div>
+        <div class="map" id="hero-map">
+          <div class="map-line line-a"></div><div class="map-line line-b"></div>
+          <div class="road road-1"></div><div class="road road-2"></div><div class="road road-3"></div>
+          <div class="pin pin-1" data-fac="Facility #204" data-dist="82 m" data-status="Verified" data-scheme="IPSrC Senior Living"><i></i><span>Facility #204 · Verified</span></div>
+          <div class="pin pin-2" data-fac="Facility #117" data-dist="114 m" data-status="In progress" data-scheme="NAPDDR Rehab Centre"><i></i><span>Facility #117 · Active</span></div>
+          <div class="pin pin-3 warning" data-fac="Facility #031" data-dist="340 m (Geofence Breach)" data-status="Attention" data-scheme="PM-AJAY Hostel"><i></i><span>Facility #031 · Alert</span></div>
+        </div>
+        <div class="floating-panel panel-top" id="stage-panel-top">
+          <span class="tiny-label">LIVE INSPECTION TELEMETRY</span>
+          <strong id="stage-fac-name">Facility #204</strong>
+          <span class="status" id="stage-fac-status"><b></b> Verified · 82 m</span>
+        </div>
+        <div class="floating-panel panel-bottom">
+          <div class="score"><strong>96</strong><span>Integrity</span></div>
+          <div class="checks"><span>GPS ✓ (150m rule)</span><span>QR ✓ (Encrypted)</span><span>Evidence ✓ (EXIF sealed)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="statement" id="platform">
+      <p class="eyebrow">ONE CONNECTED WORKFLOW</p>
+      <h2>From field to<br><span>command center.</span></h2>
+      <div class="flow" id="workflow">
+        <div class="flow-item active" data-step="0"><small>01</small><strong>AI Duty Assignment</strong><span>Random schedule 1–2h prior</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" data-step="1"><small>02</small><strong>Dual-Lock Verify</strong><span>150m Haversine + QR</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" data-step="2"><small>03</small><strong>Digital Audit Evidence</strong><span>Dynamic checklist + photo</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" data-step="3"><small>04</small><strong>Sub-500ms Sirens</strong><span>Live WebSocket command view</span></div>
+      </div>
+    </section>
+
+    <!-- The Ecosystem: Inspector App + Command Center -->
+    <section class="product-section">
+      <div class="product-intro reveal">
+        <p class="eyebrow">THE ECOSYSTEM</p>
+        <h2>One system.<br><span>Two perspectives.</span></h2>
+        <p>Built around the people who inspect and the supervisors who need accountability.</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Phone Card: Inspector Mobile Experience -->
+        <div class="phone-card reveal">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-head"><span>9:41</span><span id="phone-mode-pill" style="color:#85ab94">● Fastify 4G Live</span></div>
+            <div class="phone-title">Inspection <small>04 / 12</small></div>
+            <div class="verify-box" id="phone-verify-box">
+              <div class="verify-ring" id="phone-verify-ring">✓</div>
+              <div><strong id="phone-verify-title">Location verified</strong><span id="phone-verify-sub">82 m from facility (≤150m limit)</span></div>
+            </div>
+            <div class="qr-box" id="phone-qr-box">
+              <div class="qr-pattern"></div>
+              <span id="phone-qr-text">Scan facility dynamic QR</span>
+            </div>
+            <div class="mini-checks" id="phone-checks">
+              <div id="chk-duty">✓ Assigned</div>
+              <div id="chk-gps">✓ GPS 82m</div>
+              <div id="chk-qr">✓ QR Token</div>
+            </div>
+            <div id="phone-toast" style="display:none;font-size:9px;background:#587364;color:#fff;padding:8px;border-radius:8px;text-align:center;margin-bottom:8px">
+              ✓ Payload cryptographically sealed in SQLite!
+            </div>
+            <button id="phone-btn">Continue inspection →</button>
+          </div>
+          <div class="product-caption">
+            <span>01</span>
+            <strong>Inspector Mobile App</strong>
+            <small>React Native · SQLite offline cache · 150m Haversine lock</small>
+          </div>
+        </div>
+
+        <!-- Dashboard Card: Supervisor Visibility -->
+        <div class="dashboard-card reveal delay">
+          <div class="dash-head">
+            <div><span class="tiny-label">COMMAND CENTER</span><strong>Today's inspections</strong></div>
+            <span class="live-pill"><b></b> Live WebSocket (&lt;500ms)</span>
+          </div>
+          <div class="dash-body">
+            <div class="dash-map">
+              <div class="dash-road r1"></div><div class="dash-road r2"></div><div class="dash-road r3"></div>
+              <span class="dash-pin d1" title="Facility #204 - Verified"></span>
+              <span class="dash-pin d2" title="Facility #117 - In Progress"></span>
+              <span class="dash-pin d3" title="Facility #031 - Attention"></span>
+            </div>
+            <div class="dash-side">
+              <div class="metric"><span>Active Inspections</span><strong>12</strong></div>
+              <div class="metric"><span>Dual-Lock Verified</span><strong style="color:#587364">09</strong></div>
+              <div class="metric alert"><span>Anomalies / Sirens</span><strong>03</strong></div>
+              <div class="activity"><span>10:42</span><p>Inspection #204 verified (82m GPS)</p></div>
+              <div class="activity"><span>10:38</span><p>Facility #117 evidence submitted</p></div>
+              <div class="activity"><span>10:31</span><p style="color:#a17a4c">Facility #031 geofence breach alert</p></div>
+            </div>
+          </div>
+          <div class="product-caption">
+            <span>02</span>
+            <strong>Supervisor Command Center</strong>
+            <small>Fastify gateway · Socket.io live sirens · Unannounced CCTV watch</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Gaps vs SquareX Solutions -->
+    <section class="gaps-section" id="gaps">
+      <div class="reveal">
+        <p class="eyebrow">THE OPERATIONAL CHALLENGE &amp; SOLUTION</p>
+        <h2>Closing four critical<br><span>inspection vulnerabilities.</span></h2>
+      </div>
+
+      <div class="gaps-grid reveal delay">
+        <div class="gap-card">
+          <div>
+            <div class="gap-head">
+              <span class="gap-tag">VULNERABILITY 01</span>
+              <small style="font-size:10px;color:#999">Physical Presence</small>
+            </div>
+            <h3>Ghost Inspections</h3>
+            <p class="gap-problem">Inspections reported as complete without verified physical presence on-site.</p>
+          </div>
+          <div class="gap-solution">
+            <strong>Dual-Lock Geo-Fence</strong>
+            <span>Encrypted facility QR + 150m Haversine spherical GPS lock.</span>
+          </div>
+        </div>
+
+        <div class="gap-card">
+          <div>
+            <div class="gap-head">
+              <span class="gap-tag">VULNERABILITY 02</span>
+              <small style="font-size:10px;color:#999">Beneficiary Audit</small>
+            </div>
+            <h3>Proxy Beneficiaries</h3>
+            <p class="gap-problem">Facilities claiming grant-in-aid support for students or patients who are not verified.</p>
+          </div>
+          <div class="gap-solution">
+            <strong>Digital Audit &amp; Vault</strong>
+            <span>Dynamic headcount checklists + EXIF timestamped geotagged photos.</span>
+          </div>
+        </div>
+
+        <div class="gap-card">
+          <div>
+            <div class="gap-head">
+              <span class="gap-tag">VULNERABILITY 03</span>
+              <small style="font-size:10px;color:#999">Anti-Collusion</small>
+            </div>
+            <h3>Pre-Planned Collusion</h3>
+            <p class="gap-problem">Advance notice allows facility conditions and records to be staged before an audit.</p>
+          </div>
+          <div class="gap-solution">
+            <strong>AI Surprise Assignment</strong>
+            <span>Autonomous scheduling dispatches inspectors randomly 1–2h prior.</span>
+          </div>
+        </div>
+
+        <div class="gap-card">
+          <div>
+            <div class="gap-head">
+              <span class="gap-tag">VULNERABILITY 04</span>
+              <small style="font-size:10px;color:#999">Data Latency</small>
+            </div>
+            <h3>Paper / WhatsApp Delay</h3>
+            <p class="gap-problem">Paper files remain offline for 3–7 days before reaching supervisory authorities.</p>
+          </div>
+          <div class="gap-solution">
+            <strong>Sub-500ms Sirens</strong>
+            <span>Fastify &amp; WebSocket streaming alerts central command instantly.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audited MoSJE Welfare Schemes -->
+    <section class="schemes-section" id="schemes">
+      <div class="reveal">
+        <p class="eyebrow">GOVERNMENT GRANT-IN-AID MANDATE</p>
+        <h2>Audited Ministry<br><span>schemes &amp; programs.</span></h2>
+        <p style="max-width:520px;color:#747975;font-size:13px;line-height:1.6;margin-top:14px">
+          SquareX enforces rigorous anti-proxy verification across key Ministry of Social Justice &amp; Empowerment (MoSJE / DoSJE) grant allocations.
+        </p>
+      </div>
+
+      <div class="schemes-grid reveal delay">
+        <div class="scheme-card">
+          <div>
+            <div class="scheme-pill">IPSrC</div>
+            <h3>Senior Citizens Programme</h3>
+            <p>Audits Old Age Homes and Day Care Centers. Verifies nutritional standards and resident occupancy.</p>
+          </div>
+          <div class="scheme-meta">150m Haversine + Meal Distribution Check</div>
+        </div>
+
+        <div class="scheme-card">
+          <div>
+            <div class="scheme-pill">NAPDDR</div>
+            <h3>Drug Demand Reduction</h3>
+            <p>Audits Integrated Rehabilitation Centres for Addicts (IRCAs). Ensures genuine inpatient medical care.</p>
+          </div>
+          <div class="scheme-meta">Daily Patient Census + Medicine Vault</div>
+        </div>
+
+        <div class="scheme-card">
+          <div>
+            <div class="scheme-pill">PM-AJAY</div>
+            <h3>Anusuchit Jaati Abhyuday</h3>
+            <p>Monitors hostel infrastructure, civic works, and welfare projects for marginalized communities.</p>
+          </div>
+          <div class="scheme-meta">Milestone Geotagging + Anti-Fraud Lock</div>
+        </div>
+
+        <div class="scheme-card">
+          <div>
+            <div class="scheme-pill">SMILE</div>
+            <h3>Marginalized Livelihood</h3>
+            <p>Oversight on shelter homes, skill programs, and welfare drives for transgender and rehabilitation beneficiaries.</p>
+          </div>
+          <div class="scheme-meta">Sub-500ms Live Siren + Offline Ready</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Engine Architecture -->
+    <section class="trust-section">
+      <div class="trust-copy reveal">
+        <p class="eyebrow">TRUST ENGINE</p>
+        <h2>Trust is built<br><span>into the workflow.</span></h2>
+        <p style="font-size:13px;color:#777d78;line-height:1.6;margin-top:20px;max-width:380px">
+          Zero-trust by design. An inspection cannot be marked complete unless mathematical geofence criteria and cryptographic tokens converge.
+        </p>
+      </div>
+      <div class="trust-visual reveal delay">
+        <div class="signal signal-1"><b>GPS</b><span>82 m (≤150m limit)</span></div>
+        <div class="signal signal-2"><b>QR</b><span>Encrypted Dynamic Key</span></div>
+        <div class="signal signal-3"><b>Evidence</b><span>EXIF &amp; Media Sealed</span></div>
+        <div class="signal signal-4"><b>Time</b><span>10:42 IST Synced</span></div>
+        <div class="trust-core"><span>INSPECTION</span><strong>VERIFIED</strong><i>96% integrity</i></div>
+      </div>
+    </section>
+
+    <!-- Real-Time Monitoring Command Center Terminal -->
+    <section class="monitor-section" id="monitor">
+      <div class="monitor-head reveal">
+        <div><p class="eyebrow">REAL-TIME MONITORING</p><h2>See what is happening<br><span>while it happens.</span></h2></div>
+        <p>Live status, location, and verified digital evidence in one unified terminal.</p>
+      </div>
+      <div class="monitor-window reveal delay">
+        <div class="window-bar">
+          <span style="background:#e06c75"></span><span style="background:#e5c07b"></span><span style="background:#98c379"></span>
+          <label>squarex / command-center-terminal</label>
+          <a href="https://adminaccess.kxoproduction.in/" target="_blank" rel="noopener" style="margin-left:auto;font-size:10px;font-weight:600;color:#587364;display:flex;align-items:center;gap:4px;text-decoration:none">Launch Live Portal ↗</a>
+        </div>
+        <div class="window-content">
+          <aside>
+            <strong>SquareX</strong>
+            <a class="selected tab-link" data-tab="overview">Overview</a>
+            <a class="tab-link" data-tab="inspections">Live Audits</a>
+            <a class="tab-link" data-tab="facilities">Facilities</a>
+            <a class="tab-link" data-tab="evidence">Evidence Vault</a>
+            <a href="https://adminaccess.kxoproduction.in/" target="_blank" rel="noopener" style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;color:#587364;font-weight:600;background:rgba(88,115,100,0.08);border:1px dashed #587364;padding:10px 11px;border-radius:8px">Admin Portal <span>↗</span></a>
+          </aside>
+          
+          <div class="window-main">
+            <!-- Tab 1: Overview -->
+            <div class="tab-content-pane active" id="tab-overview">
+              <div class="window-top">
+                <div><small>OVERVIEW</small><h3>National Inspection Feed</h3></div>
+                <span id="live-ist-clock">10:42:04 IST</span>
+              </div>
+              <div class="stats">
+                <div><small>ACTIVE INSPECTORS</small><strong>12</strong></div>
+                <div><small>VERIFIED ON-SITE</small><strong style="color:#587364">09</strong></div>
+                <div><small>ATTENTION / SIRENS</small><strong style="color:#a17a4c">03</strong></div>
+              </div>
+              <div class="inspection-row">
+                <div><b>Facility #204 (IPSrC Senior Living)</b><span>Inspector Sharma · 82 m · Sector 9</span></div>
+                <span class="verified">Verified</span>
+                <span>10:42</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>Facility #117 (NAPDDR Rehab Centre)</b><span>Inspector Verma · 114 m · Zone 2</span></div>
+                <span class="progress">In progress</span>
+                <span>10:38</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>Facility #031 (PM-AJAY Hostel)</b><span>Inspector Patel · Geofence Anomaly (340m)</span></div>
+                <span class="attention">Attention</span>
+                <span>10:31</span>
+              </div>
+            </div>
+
+            <!-- Tab 2: Live Audits -->
+            <div class="tab-content-pane" id="tab-inspections">
+              <div class="window-top">
+                <div><small>LIVE TELEMETRY</small><h3>Active Field Audits</h3></div>
+                <span>Fastify Gateway</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>#AUDIT-981 · Facility #204</b><span>Haversine: 82.4m · SHA-256: 0x8f3c...91b4</span></div>
+                <span class="verified">Dual-Lock OK</span>
+                <span>10:42</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>#AUDIT-982 · Facility #117</b><span>Haversine: 114.1m · Checklist: 8/10 complete</span></div>
+                <span class="progress">Syncing</span>
+                <span>10:38</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>#AUDIT-983 · Facility #031</b><span>Haversine: 340m · GPS Geofence boundary exceeded</span></div>
+                <span class="attention">Siren Alert</span>
+                <span>10:31</span>
+              </div>
+            </div>
+
+            <!-- Tab 3: Facilities -->
+            <div class="tab-content-pane" id="tab-facilities">
+              <div class="window-top">
+                <div><small>REGISTRY</small><h3>Monitored MoSJE Centers</h3></div>
+                <span>150m Haversine Active</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>Facility #204 (New Delhi)</b><span>28.6139° N, 77.2090° E · IPSrC Senior Care</span></div>
+                <span class="verified">Active</span>
+                <span>Daily</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>Facility #117 (Jaipur)</b><span>26.9124° N, 75.7873° E · NAPDDR Drug Rehab</span></div>
+                <span class="verified">Active</span>
+                <span>Daily</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>Facility #031 (Bhopal)</b><span>23.2599° N, 77.4126° E · PM-AJAY Hostel</span></div>
+                <span class="attention">Flagged</span>
+                <span>Daily</span>
+              </div>
+            </div>
+
+            <!-- Tab 4: Evidence -->
+            <div class="tab-content-pane" id="tab-evidence">
+              <div class="window-top">
+                <div><small>CRYPTO VAULT</small><h3>Tamper-Proof Audit Records</h3></div>
+                <span>Cloudinary CDN</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>Kitchen &amp; Nutrition Photo #204</b><span>EXIF timestamped · SHA-256 seal: e3b0c442...98a1</span></div>
+                <span class="verified">Untampered</span>
+                <span>10:42</span>
+              </div>
+              <div class="inspection-row">
+                <div><b>Medical Bay Inventory #117</b><span>EXIF timestamped · SHA-256 seal: 5994471a...8e2b</span></div>
+                <span class="verified">Untampered</span>
+                <span>10:38</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Field Resilience: Offline Store-and-Forward -->
+    <section class="field-section">
+      <div class="field-card reveal">
+        <div>
+          <p class="eyebrow">BUILT FOR THE FIELD</p>
+          <h2>Works with the<br><span>real world.</span></h2>
+          <p style="font-size:13px;color:#777d78;line-height:1.6;margin-top:16px;max-width:380px">
+            Built for remote rural areas with zero cellular reception. SQLite caches and cryptographically seals audit payloads until a handshake is restored.
+          </p>
+        </div>
+        <div class="field-states">
+          <div><strong>Offline</strong><span>Capture locally in SQLite</span></div>
+          <i>→</i>
+          <div><strong>Sync</strong><span>Auto-sync when 4G detected</span></div>
+          <i>→</i>
+          <div><strong>Verified</strong><span>Cryptographic record secured</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Topology & Feasibility Matrix -->
+    <section class="topology-section" id="topology">
+      <div class="reveal">
+        <p class="eyebrow">TECHNICAL TOPOLOGY &amp; DELIVERY CASE</p>
+        <h2>Enterprise architecture.<br><span>Measurable operational impact.</span></h2>
+      </div>
+
+      <div class="topology-grid reveal delay">
+        <div class="topology-card">
+          <span class="topo-layer">01 / FIELD LAYER</span>
+          <strong>Inspector App</strong>
+          <p>React Native &amp; Expo · SQLite local cache · Camera · Fine location · Dynamic QR scanner.</p>
+        </div>
+
+        <div class="topology-card">
+          <span class="topo-layer">02 / GATEWAY LAYER</span>
+          <strong>Fastify API</strong>
+          <p>Node.js REST API · JWT authentication (RFC 7519) · Socket.io &lt;500ms WebSocket sirens.</p>
+        </div>
+
+        <div class="topology-card">
+          <span class="topo-layer">03 / DATA LAYER</span>
+          <strong>MongoDB Atlas</strong>
+          <p>GeoJSON 2dsphere indexing for spherical Haversine calculations · Cloudinary media CDN.</p>
+        </div>
+
+        <div class="topology-card">
+          <span class="topo-layer">04 / STREAMING LAYER</span>
+          <strong>WebRTC &amp; RTSP</strong>
+          <p>Live CCTV stream gateway &amp; in-app WebRTC video calls for unannounced supervisor checks.</p>
+        </div>
+      </div>
+
+      <div class="metrics-row reveal delay">
+        <div class="metric-box">
+          <small>ALERT LATENCY</small>
+          <div class="metric-compare">
+            <span class="metric-before">7 days</span>
+            <span class="metric-arrow">→</span>
+            <span class="metric-after">&lt;500ms</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <small>PHYSICAL PRESENCE</small>
+          <div class="metric-compare">
+            <span class="metric-before">0% verified</span>
+            <span class="metric-arrow">→</span>
+            <span class="metric-after">Dual-Lock</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <small>REMOTE VISIBILITY</small>
+          <div class="metric-compare">
+            <span class="metric-before">None</span>
+            <span class="metric-arrow">→</span>
+            <span class="metric-after">CCTV + RTC</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+      <p class="eyebrow">SMART INDIA HACKATHON 2026 · SQUAREX</p>
+      <h2>Make every inspection<br><em>accountable.</em></h2>
+      <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
+        <a class="button primary" href="https://adminaccess.kxoproduction.in/" target="_blank" rel="noopener">Launch Admin Portal <span>↗</span></a>
+        <a class="button secondary" href="#platform">Explore Platform <span>↓</span></a>
+        <button class="button secondary" id="btn-cta-demo">Watch 2-Min Demo <span>▶</span></button>
+        <a class="button secondary" href="https://github.com/TeamSquare/NIRIKSHAN" target="_blank" rel="noopener">GitHub Repository <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span style="font-weight:700;color:#505550;font-size:12px">SquareX (NIRIKSHAN)</span>
+      <span>Smart Real-Time Monitoring &amp; Inspection Platform</span>
+      <small style="font-size:10px;color:#999">SIH26095 · Theme: Smart Automation · Team: SquareX</small>
+    </div>
+    <div style="display:flex;gap:20px;font-size:11px;align-items:center">
+      <a href="https://adminaccess.kxoproduction.in/" target="_blank" rel="noopener" style="font-weight:700;color:#587364">Admin Access ↗</a>
+      <a href="#platform">Platform</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#gaps">Gaps &amp; Fixes</a>
+      <a href="#schemes">Schemes</a>
+      <a href="#monitor">Command Center</a>
+      <a href="https://github.com/TeamSquare/NIRIKSHAN" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <!-- Video Demo Modal -->
+  <div class="modal-backdrop" id="video-modal">
+    <div class="modal-window">
+      <div class="modal-window-head">
+        <span style="font-size:11px;font-weight:700;color:#587364">SQUAREX · SIH26095 PRODUCT DEMO</span>
+        <span class="modal-close-btn" id="close-modal">&times;</span>
+      </div>
+      <div class="modal-body-wrap">
+        <iframe 
+          id="demo-video-frame" 
+          src="" 
+          data-src="https://www.youtube-nocookie.com/embed/nirikshan-sih-demo?autoplay=1" 
+          title="SquareX Demo" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
